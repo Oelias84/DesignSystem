@@ -14,8 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_16.app
+      - name: Select latest available Xcode
+        run: sudo xcode-select -switch $(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
 
       - name: Run tests
         run: |
