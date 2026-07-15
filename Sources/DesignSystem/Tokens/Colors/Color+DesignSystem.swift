@@ -3,9 +3,9 @@
 
 import SwiftUI
 
-extension Color {
+public extension Color {
     static let lightGray = Color("lightGray", bundle: .module)
-    static let primary = Color("primary", bundle: .module)
+    static let main = Color("main", bundle: .module)
     static let dark = Color("dark", bundle: .module)
     static let green = Color("green", bundle: .module)
 }

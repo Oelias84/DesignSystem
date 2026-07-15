@@ -33,7 +33,7 @@ public struct CartButtonStyle: ButtonStyle {
                 Image(type.resource)
             }
             .frame(width: 38, height: 38)
-            .background(Color.primary)
+            .background(Color.main)
             .clipShape(RoundedRectangle(cornerRadius: 38/2, style: .continuous))
             .opacity(configuration.isPressed ? 0.7 : 1)
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)

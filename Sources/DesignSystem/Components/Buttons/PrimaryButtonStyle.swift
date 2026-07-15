@@ -16,7 +16,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .font(DSFont.heading2)
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity, maxHeight: 52)
-            .background(Color.primary)
+            .background(Color.main)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .opacity(configuration.isPressed ? 0.7 : 1)
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
