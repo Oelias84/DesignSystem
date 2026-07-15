@@ -29,4 +29,5 @@ public extension ButtonStyle where Self == PrimaryButtonStyle {
 
 #Preview {
     Button("Button") {}.buttonStyle(.primary)
+        .padding()
 }
