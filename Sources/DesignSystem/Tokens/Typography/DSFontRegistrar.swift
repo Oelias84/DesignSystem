@@ -5,6 +5,7 @@
 //  Created by Ofir Elias on 14/07/2026.
 //
 
+import SwiftUI
 import CoreText
 
 enum DSFontRegistrar {

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(macOS 10.15, *)
 public enum DSFont {
     public static let heading1 = Font.system(size: 30, weight: .black)
     public static let heading2 = Font.system(size: 17, weight: .semibold)

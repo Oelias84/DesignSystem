@@ -3,7 +3,6 @@
 
 import SwiftUI
 
-@available(macOS 10.15, *)
 extension Color {
     static let lightGray = Color("lightGray", bundle: .module)
     static let primary = Color("primary", bundle: .module)
