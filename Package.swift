@@ -15,11 +15,17 @@ let package = Package(
             targets: ["DesignSystem"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/airbnb/lottie-ios.git", .upToNextMajor(from: "4.6.1")),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DesignSystem",
+            dependencies: [
+                .product(name: "Lottie", package: "lottie-ios"),
+            ],
             resources: [.process("Resources")]
         ),
         .testTarget(
