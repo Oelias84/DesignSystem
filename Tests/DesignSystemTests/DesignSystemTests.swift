@@ -1,5 +1,6 @@
 import Testing
 import SwiftUI
+import Lottie
 @testable import DesignSystem
 
 @Test func cartTypeMapping() {
@@ -31,7 +32,31 @@ import SwiftUI
     assertRGB(Color.lightGray, r: 0xF3, g: 0xF6, b: 0xFA)
 }
 
-private func assertRGB(_ color: Color, r expectedR: Int, g expectedG: Int, b expectedB: Int, sourceLocation: SourceLocation = #_sourceLocation) {
+@Test func checkmarkLoopModeMapping() {
+    #expect(CheckmarkAnimationView.LoopMode.playOnce.lottieValue == .playOnce)
+    #expect(CheckmarkAnimationView.LoopMode.loop.lottieValue == .loop)
+}
+
+@Test func checkmarkAnimationResourceExists() {
+    #expect(Bundle.module.url(forResource: "checkmark", withExtension: "json") != nil)
+}
+
+@Test func cardImageResourcesExist() {
+    #expect(UIImage(named: "cardBackground", in: .module, compatibleWith: nil) != nil)
+    #expect(UIImage(named: "visa", in: .module, compatibleWith: nil) != nil)
+}
+
+@Test func cardDataTypesAreComplete() {
+    #expect(DSRawView.CardData.CType.allCases.count == 4)
+}
+
+private func assertRGB(
+    _ color: Color,
+    r expectedR: Int,
+    g expectedG: Int,
+    b expectedB: Int,
+    sourceLocation: SourceLocation = #_sourceLocation
+) {
     let uiColor = UIColor(color)
     var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
     uiColor.getRed(&r, green: &g, blue: &b, alpha: &a)
