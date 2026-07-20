@@ -27,8 +27,6 @@ public struct BankCardView: View {
         Image(.cardBackground)
             .resizable()
             .scaledToFit()
-            .frame(maxHeight: 194)
-        
             .overlay {
                 VStack {
                     VStack(alignment: .leading, spacing: 4) {
@@ -63,13 +61,16 @@ public struct BankCardView: View {
                         }
                     }
                 }
-                .frame(height: 160)
                 .padding(24)
             }
+            .frame(maxHeight: 194)
     }
 }
 
 #Preview {
-    BankCardView(title: "Salary card", balance: "10,000$", suffix: "1234")
-        .padding()
+    ScrollView {
+        ForEach(0..<20) { _ in
+            BankCardView(title: "Salary card", balance: "10,000$", suffix: "1234")
+        }
+    }
 }
