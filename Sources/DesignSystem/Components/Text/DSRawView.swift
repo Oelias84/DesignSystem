@@ -12,7 +12,12 @@ public struct DSRawView: View {
     public struct CardData {
         let suffix: String
         let type: CType
-        
+
+        public init(suffix: String, type: CType) {
+            self.suffix = suffix
+            self.type = type
+        }
+
         public enum CType: String, CaseIterable {
             case visa
             case masterCard

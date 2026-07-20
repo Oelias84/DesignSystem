@@ -70,7 +70,7 @@ public struct BankCardView: View {
 #Preview {
     ScrollView {
         ForEach(0..<20) { _ in
-            BankCardView(title: "Salary card", balance: "10,000$", suffix: "1234")
+                BankCardView(title: "Salary card", balance: "10,000$", suffix: "1234")
         }
     }
 }
