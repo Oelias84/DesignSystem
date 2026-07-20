@@ -38,7 +38,7 @@ public struct CartButtonStyle: ButtonStyle {
                 .font(DSFont.caption)
                 .opacity(0.6)
                 .multilineTextAlignment(.center)
-                .lineLimit(2)
+                .lineLimit(2, reservesSpace: true)
         }
         .padding(8)
         .frame(width: 106, height: 106)
