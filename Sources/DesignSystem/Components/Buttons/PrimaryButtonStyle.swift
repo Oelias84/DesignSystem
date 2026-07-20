@@ -8,7 +8,9 @@
 import SwiftUI
 
 public struct PrimaryButtonStyle: ButtonStyle {
-    
+
+    @Environment(\.isEnabled) private var isEnabled
+
     public init() {}
 
     public func makeBody(configuration: Configuration) -> some View {
@@ -18,7 +20,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity, maxHeight: 52)
             .background(Color.main)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            .opacity(configuration.isPressed ? 0.7 : 1)
+            .opacity(isEnabled ? (configuration.isPressed ? 0.7 : 1) : 0.4)
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }

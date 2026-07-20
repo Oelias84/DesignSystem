@@ -28,27 +28,24 @@ public struct CartButtonStyle: ButtonStyle {
     }
     
     public func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .center) {
-            VStack {
-                Image(type.resource)
-            }
-            .frame(width: 38, height: 38)
-            .background(Color.main)
-            .clipShape(RoundedRectangle(cornerRadius: 38/2, style: .continuous))
-            .opacity(configuration.isPressed ? 0.7 : 1)
-            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
-            
+        VStack(alignment: .center, spacing: 8) {
+            Image(type.resource)
+                .frame(width: 38, height: 38)
+                .background(Color.main)
+                .clipShape(RoundedRectangle(cornerRadius: 38/2, style: .continuous))
+
             configuration.label
                 .font(DSFont.caption)
-                .frame(maxWidth: 46)
                 .opacity(0.6)
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
         }
-        .background {
-            RoundedRectangle(cornerRadius: 12)
-                .frame(width: 106, height: 106)
-                .foregroundStyle(.white)
-        }
+        .padding(8)
+        .frame(width: 106, height: 106)
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .opacity(configuration.isPressed ? 0.7 : 1)
+        .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 
