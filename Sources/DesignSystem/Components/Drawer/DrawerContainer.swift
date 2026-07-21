@@ -60,7 +60,7 @@ public struct DrawerContainer<Content: View>: View {
         .padding(24)
         .background(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(.white)
+                .fill(Color.surface)
         )
     }
 }

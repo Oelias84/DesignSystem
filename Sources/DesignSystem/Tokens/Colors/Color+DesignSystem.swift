@@ -8,4 +8,5 @@ public extension Color {
     static let main = Color("main", bundle: .module)
     static let dark = Color("dark", bundle: .module)
     static let dsGreen = Color("dsGreen", bundle: .module)
+    static let surface = Color("surface", bundle: .module)
 }
