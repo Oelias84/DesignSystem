@@ -8,7 +8,12 @@
 import SwiftUI
 
 public struct DSRawView: View {
-    
+
+    public enum DividerStyle {
+        case solid
+        case dashed
+    }
+
     public struct CardData {
         let suffix: String
         let type: CType
@@ -25,19 +30,22 @@ public struct DSRawView: View {
             case discover
         }
     }
-    
+
     private let title: String
     private let caption: String
     private let cardInfo: CardData?
-    
+    private let dividerStyle: DividerStyle
+
     public init(
         title: String,
         caption: String,
-        cardInfo: CardData? = nil
+        cardInfo: CardData? = nil,
+        dividerStyle: DividerStyle = .solid
     ) {
         self.title = title
         self.caption = caption
         self.cardInfo = cardInfo
+        self.dividerStyle = dividerStyle
     }
     
     public var body: some View {
@@ -73,8 +81,18 @@ public struct DSRawView: View {
                 }
             }
             
-            Divider()
+            dividerView
                 .padding(.top, 12)
+        }
+    }
+
+    @ViewBuilder
+    private var dividerView: some View {
+        switch dividerStyle {
+        case .solid:
+            Divider()
+        case .dashed:
+            DashedLine()
         }
     }
     
