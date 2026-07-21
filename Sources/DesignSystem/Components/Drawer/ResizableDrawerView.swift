@@ -50,17 +50,14 @@ public struct ResizableDrawerView<Content: View>: View {
             }
             .padding([.top, .horizontal])
 
-            VStack {
-                if showDetails {
-                    ScrollView {
-                        content
-                            .padding(.horizontal)
-                    }
-                    .padding(.top)
-                    .frame(maxHeight: 186)
-                }
+            ScrollView {
+                content
+                    .padding(.horizontal)
             }
-            .frame(minHeight: 18)
+            .padding(.top)
+            .frame(maxHeight: showDetails ? 186 : 0)
+            .opacity(showDetails ? 1 : 0)
+            .clipped()
         }
         .padding(16)
         .frame(maxWidth: .infinity)
