@@ -43,7 +43,7 @@ public struct ResizableDrawerView<Content: View>: View {
                     Image(systemName: "chevron.down")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 14)
+                        .frame(width: 14, height: 14)
                         .rotationEffect(.degrees(showDetails ? 0 : 180))
                         .foregroundStyle(Color.dark.opacity(0.7))
                 }
