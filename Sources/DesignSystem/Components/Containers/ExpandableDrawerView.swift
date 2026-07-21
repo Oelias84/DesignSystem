@@ -1,5 +1,5 @@
 //
-//  ResizableDrawerView.swift
+//  ExpandableDrawerView.swift
 //  DesignSystem
 //
 //  Created by Ofir Elias on 20/07/2026.
@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-public struct ResizableDrawerView<Content: View>: View {
+public struct ExpandableDrawerView<Content: View>: View {
 
     private let title: String
     private let content: Content
     @State private var showDetails: Bool = false
+    @State private var contentHeight: CGFloat = 0
 
     public init(title: String, @ViewBuilder content: () -> Content) {
         self.title = title
@@ -53,11 +54,17 @@ public struct ResizableDrawerView<Content: View>: View {
             ScrollView {
                 content
                     .padding(.horizontal)
+                    .background {
+                        GeometryReader { proxy in
+                            Color.clear.preference(key: DrawerContentHeightKey.self, value: proxy.size.height)
+                        }
+                    }
             }
             .padding(.top)
-            .frame(maxHeight: showDetails ? 186 : 0)
+            .frame(maxHeight: showDetails ? contentHeight : 0)
             .opacity(showDetails ? 1 : 0)
             .clipped()
+            .onPreferenceChange(DrawerContentHeightKey.self) { contentHeight = $0 }
         }
         .padding(16)
         .frame(maxWidth: .infinity)
@@ -76,8 +83,16 @@ public struct ResizableDrawerView<Content: View>: View {
     }
 }
 
+private struct DrawerContentHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
 #Preview {
-    ResizableDrawerView(title: "Operation details") {
+    ExpandableDrawerView(title: "Operation details") {
         DSRawView(title: "Title", caption: "Caption")
     }
     .padding()
