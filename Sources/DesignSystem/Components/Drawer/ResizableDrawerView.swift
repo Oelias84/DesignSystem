@@ -65,8 +65,16 @@ public struct ResizableDrawerView<Content: View>: View {
         .padding(16)
         .frame(maxWidth: .infinity)
         .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.surface)
+            UnevenRoundedRectangle(
+                cornerRadii: RectangleCornerRadii(
+                    topLeading: 24,
+                    bottomLeading: 0,
+                    bottomTrailing: 0,
+                    topTrailing: 24
+                ),
+                style: .continuous
+            )
+            .fill(Color.surface)
         )
     }
 }
