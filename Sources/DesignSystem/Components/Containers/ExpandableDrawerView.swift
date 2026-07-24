@@ -54,17 +54,11 @@ public struct ExpandableDrawerView<Content: View>: View {
             ScrollView {
                 content
                     .padding(.horizontal)
-                    .background {
-                        GeometryReader { proxy in
-                            Color.clear.preference(key: DrawerContentHeightKey.self, value: proxy.size.height)
-                        }
-                    }
             }
             .padding(.top)
             .frame(maxHeight: showDetails ? contentHeight : 0)
             .opacity(showDetails ? 1 : 0)
             .clipped()
-            .onPreferenceChange(DrawerContentHeightKey.self) { contentHeight = $0 }
         }
         .padding(16)
         .frame(maxWidth: .infinity)
@@ -80,6 +74,22 @@ public struct ExpandableDrawerView<Content: View>: View {
             )
             .fill(Color.surface)
         )
+        .background(alignment: .top) {
+            // Hidden, unconstrained copy used only to measure the content's natural
+            // height — the visible copy above is always laid out inside a frame
+            // that's already clamped to 0 when collapsed, so it can never report
+            // its own natural size via GeometryReader.
+            content
+                .padding(.horizontal)
+                .fixedSize(horizontal: false, vertical: true)
+                .hidden()
+                .background {
+                    GeometryReader { proxy in
+                        Color.clear.preference(key: DrawerContentHeightKey.self, value: proxy.size.height)
+                    }
+                }
+        }
+        .onPreferenceChange(DrawerContentHeightKey.self) { contentHeight = $0 }
     }
 }
 
