@@ -12,7 +12,6 @@ public struct ExpandableDrawerView<Content: View>: View {
     private let title: String
     private let content: Content
     @State private var showDetails: Bool = false
-    @State private var contentHeight: CGFloat = 0
 
     public init(title: String, @ViewBuilder content: () -> Content) {
         self.title = title
@@ -56,7 +55,7 @@ public struct ExpandableDrawerView<Content: View>: View {
                     .padding(.horizontal)
             }
             .padding(.top)
-            .frame(maxHeight: showDetails ? contentHeight : 0)
+            .frame(maxHeight: showDetails ? 186 : 0)
             .opacity(showDetails ? 1 : 0)
             .clipped()
         }
@@ -74,35 +73,14 @@ public struct ExpandableDrawerView<Content: View>: View {
             )
             .fill(Color.surface)
         )
-        .background(alignment: .top) {
-            // Hidden, unconstrained copy used only to measure the content's natural
-            // height — the visible copy above is always laid out inside a frame
-            // that's already clamped to 0 when collapsed, so it can never report
-            // its own natural size via GeometryReader.
-            content
-                .padding(.horizontal)
-                .fixedSize(horizontal: false, vertical: true)
-                .hidden()
-                .background {
-                    GeometryReader { proxy in
-                        Color.clear.preference(key: DrawerContentHeightKey.self, value: proxy.size.height)
-                    }
-                }
-        }
-        .onPreferenceChange(DrawerContentHeightKey.self) { contentHeight = $0 }
-    }
-}
-
-private struct DrawerContentHeightKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
     }
 }
 
 #Preview {
     ExpandableDrawerView(title: "Operation details") {
+        DSRawView(title: "Title", caption: "Caption")
+        DSRawView(title: "Title", caption: "Caption")
+        DSRawView(title: "Title", caption: "Caption")
         DSRawView(title: "Title", caption: "Caption")
     }
     .padding()
